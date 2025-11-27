@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\api",
+    "\\src\\pages",
+    "\\src\\pages\\auth",
+    "\\src\\router",
+    "\\src\\routes",
+    "\\src\\services"
+  ],
+  "PreviewInSolutionExplorer": false
+}
