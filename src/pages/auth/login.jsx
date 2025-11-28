@@ -23,7 +23,6 @@ const Login = () => {
     try {
 
       await login(username, password);
-      // on success redirect to admin dashboard
       navigate("/admin/dashboard");
     } catch (err) {
       setError("Invalid credentials or server error.");
@@ -38,17 +37,13 @@ const Login = () => {
 
       <div className="cv-login-card">
         <div className="cv-left-illustration" aria-hidden="true">
-          {/* decorative illustration area (you can replace with an image) */}
-          {/* <div className="cv-illus-stack" /> */}
           <img src={bookside} />
         </div>
 
         <div className="cv-right-form">
           <img src={logo} alt="CareerVault" className="cv-logo" />
 
-          {/* <h2 className="cv-title">CareerVault</h2>
-          <p className="cv-subtitle">Unlock your future</p> */}
-
+         
           {error && <div className="cv-error">{error}</div>}
 
           <form className="cv-form" onSubmit={onSubmit} autoComplete="off">

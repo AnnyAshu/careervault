@@ -1,32 +1,36 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./pages/auth/login.jsx";
-import AdminDashboard from "./pages/dashboard/admindashboard.jsx";
-import ProtectedRoute from "./routes/protectedroute.jsx";
 import { AuthProvider } from "./context/authcontext.jsx";
+import ProtectedRoute from "./routes/protectedroute.jsx";
+
+import Login from "./pages/auth/login.jsx";
+import AdminDashboardLayout from "./pages/layout/admindashboardlayout.jsx";
+
+import DashboardHome from "./pages/dashboard/admindashboard.jsx";
 import Profile from "./pages/profile/userprofile.jsx";
+import MyCourses from "./pages/courses/mycourses.jsx";
+import Applications from "./pages/applications/applications.jsx";
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
 
-          {/* DEFAULT ROUTE FIX */}
+          {/* Default */}
           <Route path="/" element={<Navigate to="/login" />} />
 
+          {/* Login */}
           <Route path="/login" element={<Login />} />
-          
-          {/* Profile Page Route */}
-          <Route path="/profile" element={<Profile />} />
 
+          {/* ADMIN LAYOUT */}
+          <Route path="/admin" element={<ProtectedRoute><AdminDashboardLayout /></ProtectedRoute>}>
 
-          <Route
-            path="/admin/dashboard"
-            element={
-              <ProtectedRoute>
-                <AdminDashboard />
-              </ProtectedRoute>
-            }
-          />
+            <Route index element={<DashboardHome />} />
+            <Route path="dashboard" element={<DashboardHome />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="courses" element={<MyCourses />} />
+            <Route path="applications" element={<Applications />} />
+          </Route>
+
         </Routes>
       </BrowserRouter>
     </AuthProvider>
@@ -34,3 +38,4 @@ function App() {
 }
 
 export default App;
+

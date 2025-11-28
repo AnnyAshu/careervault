@@ -1,0 +1,111 @@
+.applications-container {
+  padding: 25px;
+  width: 100%;
+}
+
+.applications-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.search-box input:focus {
+  border-color: #8a5fff;
+  box-shadow: 0 0 3px rgba(138, 95, 255, 0.3);
+}
+
+.applications-list {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.application-card {
+  background: #fff;
+  padding: 18px;
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.app-info {
+  flex: 1;
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.app-company {
+  font-size: 15px;
+  color: #666;
+}
+
+.badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-review {
+  background: #ffeaa7;
+  color: #8a6d00;
+}
+
+.badge-rejected {
+  background: #ffccc8;
+  color: #b33939;
+}
+
+.badge-interview {
+  background: #d0e9ff;
+  color: #0652dd;
+}
+
+.badge-accepted {
+  background: #b8f7d4;
+  color: #1e7b50;
+}
+
+.no-results {
+  padding: 25px;
+  text-align: center;
+  font-size: 17px;
+  color: #999;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .application-card {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .app-avatar {
+    margin: 0;
+  }
+}

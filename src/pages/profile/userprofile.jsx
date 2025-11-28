@@ -1,22 +1,21 @@
 import React from "react";
 import "../../styles/profile.css";
+import avatarProfile from "../../assets/images/avatar-female.png";
 const Profile = () => {
   return (
     <div className="profile-container">
       <h2 className="profile-title">My Profile</h2>
 
       <div className="profile-card">
-        {/* LEFT - Avatar */}
         <div className="profile-left">
           <img
-            src="/assets/profile-avatar.png"
+            src={avatarProfile}
             alt="User"
             className="profile-avatar"
           />
           <button className="upload-btn">Upload Photo</button>
         </div>
 
-        {/* RIGHT - Details */}
         <div className="profile-right">
           <div className="profile-field">
             <label>Full Name</label>
@@ -42,7 +41,6 @@ const Profile = () => {
         </div>
       </div>
 
-      {/* ABOUT SECTION */}
       <div className="about-section">
         <h3>About Me</h3>
         <textarea
