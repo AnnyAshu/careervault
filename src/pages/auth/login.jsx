@@ -1,6 +1,5 @@
-
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";   // ⬅️ Added Link
 import { useAuth } from "../../context/authcontext"; 
 import "../../styles/login.css";
 
@@ -21,7 +20,6 @@ const Login = () => {
     setError("");
     setBusy(true);
     try {
-
       await login(username, password);
       navigate("/admin/dashboard");
     } catch (err) {
@@ -43,10 +41,10 @@ const Login = () => {
         <div className="cv-right-form">
           <img src={logo} alt="CareerVault" className="cv-logo" />
 
-         
           {error && <div className="cv-error">{error}</div>}
 
           <form className="cv-form" onSubmit={onSubmit} autoComplete="off">
+
             <div className="cv-form-group">
               <label className="cv-label" htmlFor="username">Username</label>
               <input
@@ -75,14 +73,17 @@ const Login = () => {
               {busy ? "Signing in..." : "LOGIN"}
             </button>
 
+            {/* UPDATED LINKS */}
             <div className="cv-links">
-              <a href="/forgot">Forgot Password?</a>
+              <Link to="/forgot">Forgot Password?</Link>
               <span> · </span>
-              <a href="/register">Create Account</a>
+              <Link to="/register">Create Account</Link>
             </div>
           </form>
 
-          <div className="cv-footer">© {new Date().getFullYear()} CareerVault</div>
+          <div className="cv-footer">
+            © {new Date().getFullYear()} CareerVault
+          </div>
         </div>
       </div>
     </div>

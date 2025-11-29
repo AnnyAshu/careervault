@@ -3,6 +3,7 @@ import { AuthProvider } from "./context/authcontext.jsx";
 import ProtectedRoute from "./routes/protectedroute.jsx";
 
 import Login from "./pages/auth/login.jsx";
+import Register from "./pages/auth/register.jsx";
 import AdminDashboardLayout from "./pages/layout/admindashboardlayout.jsx";
 
 import DashboardHome from "./pages/dashboard/admindashboard.jsx";
@@ -20,6 +21,8 @@ function App() {
 
           {/* Login */}
           <Route path="/login" element={<Login />} />
+          {/* Register */}
+          <Route path="/register" element={<Register />} />
 
           {/* ADMIN LAYOUT */}
           <Route path="/admin" element={<ProtectedRoute><AdminDashboardLayout /></ProtectedRoute>}>
