@@ -27,7 +27,7 @@ const UserDashboard = () => {
 
   return (
     <div>
-      <h2>My Dashboard</h2>
+      <h2>User Dashboard</h2>
 
       <div className="row g-3 mt-3">
         <div className="col-md-4">

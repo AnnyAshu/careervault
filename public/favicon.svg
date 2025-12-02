@@ -1,0 +1,15 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background not filled so it stays transparent -->
+  
+  <!-- Golden arch -->
+  <path d="M128 32C86 32 56 68 56 112v28h24v-28c0-34 20-60 48-60s48 26 48 60v28h24v-28c0-44-30-80-72-80z" fill="#D9B24C"></path>
+
+  <!-- Outer blue dome shape -->
+  <path d="M128 28c-48 0-84 40-84 88v28h20v-28c0-40 28-72 64-72s64 32 64 72v28h20v-28c0-48-36-88-84-88z" fill="#1F3F70"></path>
+
+  <!-- Upward arrow -->
+  <path d="M118 150V96h-16l26-32 26 32h-16v54h-20z" fill="#1F3F70"></path>
+
+  <!-- Open book bottom -->
+  <path d="M50 140c20 20 50 30 78 30s58-10 78-30l-6-10c-18 18-46 26-72 26s-54-8-72-26l-6 10z" fill="#1F3F70"></path>
+</svg>

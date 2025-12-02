@@ -37,7 +37,7 @@ const Profile = () => {
             <input type="text" value="India" readOnly />
           </div>
 
-          <button className="edit-btn">Edit Profile</button>
+          <button className="upload-btn">Edit Profile</button>
         </div>
       </div>
 
