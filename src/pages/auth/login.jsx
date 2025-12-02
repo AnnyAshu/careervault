@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";   // ⬅️ Added Link
-import { useAuth } from "../../context/authcontext"; 
+import { useAuth } from "../../context/authcontext";
 import "../../styles/login.css";
 
 import logo from "../../assets/images/careerVaultLogo.png";
@@ -15,19 +15,41 @@ const Login = () => {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setBusy(true);
-    try {
-      await login(username, password);
-      navigate("/admin/dashboard");
-    } catch (err) {
-      setError("Invalid credentials or server error.");
-    } finally {
-      setBusy(false);
+const onSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
+  setBusy(true);
+
+  try {
+    const result = await login(username, password);
+
+    console.log("Login response:", result);
+
+    // result.roles = ["Admin"]
+    let roles = result?.roles;
+
+    if (!roles || roles.length === 0) {
+      return setError("User role not found. Contact admin.");
     }
-  };
+
+    // Extract first role (if only one)
+    let role = roles[0].toLowerCase();
+
+    if (role === "admin") {
+      navigate("/admin/dashboard");
+    } else if (role === "user") {
+      navigate("/user/dashboard");
+    } else {
+      setError("Unauthorized role.");
+    }
+
+  } catch (err) {
+    setError("Invalid credentials or server error.");
+  } finally {
+    setBusy(false);
+  }
+};
+
 
   return (
     <div className="cv-login-root">

@@ -1,58 +1,49 @@
-import React, { useEffect, useState } from "react";
-import DashboardCard from "../../components/ui/dashboardcard";
-import { getUserStats } from "../../api/userApi";
+import "../../styles/admindashboard.css";
 
-const UserDashboard = () => {
-  const [stats, setStats] = useState(null);
-
-  useEffect(() => {
-    let mounted = true;
-    const load = async () => {
-      try {
-        const s = await getUserStats();
-        if (!mounted) return;
-        setStats(s);
-      } catch (err) {
-        if (!mounted) return;
-        setStats({
-          appliedJobs: 4,
-          savedJobs: 2,
-          profileCompleteness: 78
-        });
-      }
-    };
-    load();
-    return () => (mounted = false);
-  }, []);
-
+export default function UserDashboard() {
   return (
-    <div>
-      <h2>User Dashboard</h2>
+    <>
+            <div className="dashboard-header">
+              <h1>Dashboard Overview</h1>
+              <span className="welcome-box">Welcome back, Normal User Name!</span>
+            </div>
 
-      <div className="row g-3 mt-3">
-        <div className="col-md-4">
-          <DashboardCard title="Applied Jobs" value={stats?.appliedJobs ?? "..."} icon="✉️" />
-        </div>
-        <div className="col-md-4">
-          <DashboardCard title="Saved Jobs" value={stats?.savedJobs ?? "..."} icon="🔖" />
-        </div>
-        <div className="col-md-4">
-          <DashboardCard title="Profile" value={`${stats?.profileCompleteness ?? "..."}%`} icon="🧾" />
-        </div>
-      </div>
+            <div className="cards-grid">
+              <div className="stat-card">
+                <p className="card-title">Total Applications</p>
+                <p className="card-count">122</p>
+              </div>
 
-      <div className="card mt-4">
-        <div className="card-header">Next Steps</div>
-        <div className="card-body">
-          <ul>
-            <li>Complete your profile to 100%.</li>
-            <li>Apply to recommended jobs from the dashboard.</li>
-            <li>Upload your resume in Profile → Files.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+              <div className="stat-card">
+                <p className="card-title">Interviews Scheduled</p>
+                <p className="card-count">120</p>
+              </div>
+
+              <div className="stat-card">
+                <p className="card-title">Saved Jobs</p>
+                <p className="card-count">36%</p>
+              </div>
+
+              <div className="stat-card">
+                <p className="card-title">Learning Hours</p>
+                <p className="card-count">131</p>
+              </div>
+
+              <div className="stat-card">
+                <p className="card-title">React Learning Hours</p>
+                <p className="card-count">101</p>
+              </div>
+            </div>
+
+            <div className="recent-activity">
+              <h2>Recent Activity</h2>
+              <ul>
+                <li>🔔 New Job Alert: Senior Software Developer, London.</li>
+                <li>📊 Profile Completion is now 90%.</li>
+                <li>📘 You started: Advanced React Hooks.</li>
+                <li>🗣 Feedback received for “Tech Solutions Inc.”</li>
+              </ul>
+            </div>
+          </>
   );
-};
-
-export default UserDashboard;
+}
