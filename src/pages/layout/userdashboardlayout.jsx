@@ -24,19 +24,19 @@ const UserDashboardLayout = () => {
         <ul className="sidebar-menu">
 
           <li>
-            <NavLink to="/admin/dashboard" className="menu-item">
+            <NavLink to="/user/dashboard" className="menu-item">
               🏠 Dashboard
             </NavLink>
           </li>
 
           <li>
-            <NavLink to="/admin/profile" className="menu-item">
+            <NavLink to="/user/profile" className="menu-item">
               👤 Profile
             </NavLink>
           </li>
 
           <li>
-            <NavLink to="/admin/applications" className="menu-item">
+            <NavLink to="/user/applications" className="menu-item">
               📁 Documents
             </NavLink>
           </li>
