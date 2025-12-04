@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="520" height="640" viewBox="0 0 520 640" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CareerVault bookmark logo">
+  <defs>
+    <linearGradient id="gBookTop" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#D9F0FF"/>
+      <stop offset="1" stop-color="#BFE6FF"/>
+    </linearGradient>
+
+    <linearGradient id="gBookBlue" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#2C8DF0"/>
+      <stop offset="1" stop-color="#0F66C8"/>
+    </linearGradient>
+
+    <linearGradient id="gAccent" x1="0" x2="1">
+      <stop offset="0" stop-color="#FFD974"/>
+      <stop offset="1" stop-color="#E6B43C"/>
+    </linearGradient>
+
+    <filter id="drop" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="28" flood-color="#0b2b55" flood-opacity="0.12"/>
+    </filter>
+
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#08213a" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- shadow under books -->
+  <ellipse cx="260" cy="540" rx="180" ry="34" fill="#071627" opacity="0.12"/>
+
+  <!-- Bottom book (back) -->
+  <g transform="translate(60, 420)">
+    <rect x="0" y="0" width="400" height="80" rx="10" fill="#E6F3FF"/>
+    <rect x="12" y="12" width="376" height="56" rx="6" fill="url(#gBookBlue)"/>
+    <!-- golden spine stripe -->
+    <rect x="22" y="18" width="64" height="8" rx="4" fill="url(#gAccent)"/>
+    <rect x="22" y="36" width="64" height="8" rx="4" fill="url(#gAccent)" opacity="0.9"/>
+    <!-- inner line -->
+    <rect x="20" y="10" width="360" height="60" rx="6" fill="rgba(255,255,255,0.06)"/>
+  </g>
+
+  <!-- Middle book -->
+  <g transform="translate(58, 300)">
+    <rect x="0" y="0" width="404" height="88" rx="12" fill="#F8FBFF"/>
+    <rect x="12" y="14" width="380" height="60" rx="8" fill="url(#gBookBlue)"/>
+    <rect x="24" y="22" width="92" height="12" rx="6" fill="url(#gAccent)"/>
+    <rect x="24" y="42" width="92" height="12" rx="6" fill="url(#gAccent)" opacity="0.92"/>
+    <rect x="18" y="6" width="368" height="75" rx="8" fill="rgba(255,255,255,0.04)"/>
+  </g>
+
+  <!-- Top block / tablet behind arrow -->
+  <g transform="translate(140, 80)" filter="url(#soft)">
+    <!-- glossy rounded panel -->
+    <rect x="0" y="0" width="240" height="220" rx="30" fill="url(#gBookTop)" stroke="rgba(255,255,255,0.8)" stroke-width="2"/>
+    <!-- inner highlight -->
+    <rect x="18" y="18" width="204" height="184" rx="20" fill="rgba(255,255,255,0.18)"/>
+  </g>
+
+  <!-- arrow (center) -->
+  <g transform="translate(220,160)" filter="url(#drop)">
+    <!-- arrow shadow -->
+    <path d="M0 120 L80 0 L160 120 L110 120 L110 200 L50 200 L50 120 Z"
+          transform="translate(-80,-40) scale(1.0)"
+          fill="url(#gBookBlue)" stroke="#0b4ea8" stroke-width="2" stroke-linejoin="round"/>
+
+    <!-- arrow inner highlight -->
+    <path d="M0 120 L80 18 L160 120 L110 120 L110 200 L50 200 L50 120 Z"
+          transform="translate(-80,-40)"
+          fill="rgba(255,255,255,0.12)"/>
+  </g>
+
+  <!-- small cap on top -->
+  <g transform="translate(250,40)">
+    <rect x="-28" y="-20" width="56" height="40" rx="14" fill="url(#gAccent)"/>
+    <path d="M-10 -4 L0 -20 L10 -4 Z" fill="#0a2e55" transform="translate(0,6)"/>
+    <circle cx="0" cy="-6" r="8" fill="#FFD974" stroke="#E6B43C" stroke-width="1"/>
+  </g>
+
+  <!-- subtle highlights on books -->
+  <g opacity="0.28" transform="translate(58,300)">
+    <rect x="12" y="14" width="380" height="6" rx="6" fill="#ffffff"/>
+  </g>
+
+  <!-- small outline to match style -->
+  <g transform="translate(58,300)" opacity="0.06">
+    <rect x="8" y="8" width="388" height="80" rx="10" stroke="#0b2b55" stroke-width="2" fill="none"/>
+  </g>
+
+  <!-- final small gloss on arrow -->
+  <path d="M260 160 L288 120 L312 160 L294 160 L294 210 L278 210 L278 160 Z" fill="rgba(255,255,255,0.1)" transform="translate(-90,-32)"/>
+
+</svg>
