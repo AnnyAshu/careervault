@@ -11,43 +11,99 @@ const Register = () => {
 
   const [username, setusername] = useState("");
   const [email, setEmail] = useState("");
+  const [mobileno, setMobileNo] = useState("");
+  const [gender, setGender] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [busy, setBusy] = useState(false);
   //-------- OnSubmit ------------//
-const onSubmit = async (e) => {
+ const onSubmit = async (e) => {
   e.preventDefault();
+
   setError("");
   setSuccess("");
   setBusy(true);
 
+  // ---------------------------
+  //  VALIDATIONS
+  // ---------------------------
+
+  if (!username.trim()) {
+    setError("Full Name is required.");
+    setBusy(false);
+    return;
+  }
+
+  if (!email.trim()) {
+    setError("Email is required.");
+    setBusy(false);
+    return;
+  }
+
+  if (!mobileno.trim() || mobileno.length !== 10) {
+    setError("Enter a valid 10-digit mobile number.");
+    setBusy(false);
+    return;
+  }
+
+  if (!gender) {
+    setError("Please select your gender.");
+    setBusy(false);
+    return;
+  }
+
+  if (!password.trim()) {
+    setError("Password is required.");
+    setBusy(false);
+    return;
+  }
+
+  if (password.length < 8) {
+    setError("Password must be at least 8 characters.");
+    setBusy(false);
+    return;
+  }
+
+  if (password !== confirm) {
+    setError("Password and Confirm Password do not match.");
+    setBusy(false);
+    return;
+  }
+
+  // ---------------------------
+  //  AFTER ALL VALIDATIONS PASS  
+  // ---------------------------
+
   try {
-    const result = await register(username, email, password);
+    const result = await register(username, email, password, gender, mobileno);
 
     if (result?.success) {
       setSuccess(result.message || "Registration successful!");
-
-      // Optional: 2 sec baad login page par redirect kar do
-      // setTimeout(() => {
-      //   navigate("/login");
-      // }, 2000);
+      // Optionally navigate
     } else {
       setError(result?.message || "Something went wrong!");
     }
 
   } catch (err) {
-    setError("Invalid credentials or server error.");
+    if (!err.response) {
+    // API server not reachable
+    setError("Server temporarily unavailable. Please try again later.");
+  } 
+  else if (err.response.status === 401) {
+    // wrong credentials
+    setError("Invalid username or password.");
+  } 
+  else {
+    // fallback
+    setError("Something went wrong. Please try again.");
+  }
   } finally {
     setBusy(false);
   }
 };
 
-
-  // const handleRegister = (e) => {
-  //   e.preventDefault();
-  //   navigate("/login");
-  // };
 
   return (
     <div className="reg-wrapper">
@@ -62,8 +118,8 @@ const onSubmit = async (e) => {
           <img src={logo} className="reg-logo" />
 
           <h2>Create Your Account</h2>
-          {error && <div className="cv-error">{error}</div>}
-          {success && <div className="cv-success">{success}</div>}
+          {error && <div className="reg-error">{error}</div>}
+          {success && <div className="reg-success">{success}</div>}
           <form onSubmit={onSubmit} className="reg-form" autoComplete="off">
             <input
               type="text"
@@ -78,6 +134,20 @@ const onSubmit = async (e) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+
+            <input
+              type="number"
+              placeholder="Mobile Number"
+              value={mobileno}
+              onChange={(e) => setMobileNo(e.target.value)}
+            />
+
+            {/* Gender Dropdown */}
+            <select value={gender} onChange={(e) => setGender(e.target.value)}>
+              <option value="">-- Select Gender --</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
 
             <input
               type="password"

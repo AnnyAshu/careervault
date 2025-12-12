@@ -54,6 +54,29 @@
   background: #f7f9fc;
   font-size: 15px;
 }
+.reg-form select {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  border-radius: 7px;
+  border: 1px solid #d2d7e0;
+  background: #f7f9fc;
+  font-size: 15px;
+  color: #555;
+  outline: none;
+  cursor: pointer;
+}
+
+/* On focus */
+.reg-form select:focus {
+  border-color: #4a90e2;
+  background: #fff;
+}
+
+/* Disable default dropdown arrow for clean style (optional) */
+.reg-form select::-ms-expand {
+  display: none; /* For IE */
+}
 
 .reg-form input:focus {
   border-color: #3c64f4;
@@ -74,6 +97,41 @@
 
 .reg-form button:hover {
   background: #1b3d6d;
+}
+.reg-error,
+.reg-success {
+  padding: 12px 16px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Error Message */
+.reg-error {
+  color: #b00020;
+  background: #fdecea;
+  border-left: 4px solid #b00020;
+}
+
+/* Success Message */
+.reg-success {
+  color: #0f5132;
+  background: #e8f6ef;
+  border-left: 4px solid #0f5132;
+}
+
+/* Fade-in Effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .login-link {
@@ -119,6 +177,17 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Chrome, Edge, Safari */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 
 
 

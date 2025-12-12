@@ -5,7 +5,7 @@ import ProtectedRoute from "./routes/protectedroute.jsx";
 import Login from "./pages/auth/login.jsx";
 import Register from "./pages/auth/register.jsx";
 import AdminDashboardLayout from "./pages/layout/admindashboardlayout.jsx";
-import Unauthorized from "./pages/Unauthorized";
+import Unauthorized from "./pages/Unauthorized.jsx";
 import DashboardHome from "./pages/dashboard/admindashboard.jsx";
 
 import UserDashboard from "./pages/dashboard/userdashboard.jsx";
@@ -13,7 +13,7 @@ import UserDashboardLayout from "./pages/layout/userdashboardlayout.jsx";
 import Profile from "./pages/profile/userprofile.jsx";
 import MyCourses from "./pages/courses/mycourses.jsx";
 import Applications from "./pages/applications/applications.jsx";
-function App() {
+function LandingPage() {
   return (
     <AuthProvider>
       <BrowserRouter>
@@ -49,5 +49,5 @@ function App() {
   );
 }
 
-export default App;
+export default LandingPage;
 
