@@ -15,7 +15,13 @@
   justify-content: center;
   align-items: center;
 }
-
+.regnew-centre {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
 /* White Card */
 .regnew-card {
   width: 430px;
@@ -62,16 +68,80 @@
   gap: 15px;
 }
 
-/* Radio */
 .regnew-radio {
   display: flex;
-  gap: 25px;
-  margin-bottom: 18px;
-  font-size: 15px;
+  align-items: center;      /* aligns text with radio */
+  gap: 40px;                 /* equal space between male & female */
+  margin: 12px 0 20px 0;
 }
 
-.regnew-radio input {
-  margin-right: 6px;
+.regnew-radio label {
+  display: flex;
+  align-items: center;       /* center items vertically */
+  gap: 8px;                  /* spacing between circle & text */
+  cursor: pointer;
+  font-size: 16px;
+  color: #0f1e31;            /* dark blue for branding */
+}
+
+.regnew-radio input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+/* Select */
+.reg-form select {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  border-radius: 7px;
+  border: 1px solid #d2d7e0;
+  background: #f7f9fc;
+  font-size: 15px;
+  color: #555;
+  outline: none;
+  cursor: pointer;
+}
+
+/* On focus */
+.reg-form select:focus {
+  border-color: #4a90e2;
+  background: #fff;
+}
+
+/* Disable default dropdown arrow for clean style (optional) */
+.reg-form select::-ms-expand {
+  display: none; /* For IE */
+}
+.regnew-select {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  border: 1px solid #d2d7e0;
+  background: #f7f9fc;
+  font-size: 15px;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+  appearance: none;         /* removes default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23666' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+.regnew-select:focus {
+  border-color: #1a3152;
+  background: #fff;
+}
+
+/* Remove outline in Firefox */
+.regnew-select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
 }
 
 /* Submit Button */

@@ -102,7 +102,7 @@ const Register = () => {
     <div className="regnew-wrapper">
 
       {/* LEFT WHITE CARD */}
-      <div className="regnew-left">
+      <div className="regnew-centre">
         <div className="regnew-card">
           <img src={logo} className="regnew-logo" alt="CareerVault" />
 
@@ -111,7 +111,22 @@ const Register = () => {
           {error && <div className="regnew-error">{error}</div>}
           {success && <div className="regnew-success">{success}</div>}
 
+
           <form onSubmit={onSubmit} className="regnew-form">
+           
+           <input
+                type="text"
+                placeholder="User Name"
+                value={username}
+                onChange={(e) => setusername(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={fullname}
+                onChange={(e) => setfullname(e.target.value)}
+              />
+           
             <input
               type="email"
               placeholder="Email Address"
@@ -119,7 +134,10 @@ const Register = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
 
-            <input
+            
+
+            <div className="regnew-row">
+              <input
               type="password"
               placeholder="Password"
               value={password}
@@ -132,43 +150,39 @@ const Register = () => {
               value={confirm}
               onChange={(e) => setConfirm(e.target.value)}
             />
-
-            <div className="regnew-row">
-              <input
-                type="text"
-                placeholder="User Name"
-                value={username}
-                onChange={(e) => setusername(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Full Name"
-                value={fullname}
-                onChange={(e) => setfullname(e.target.value)}
-              />
             </div>
+<select
+  className="regnew-select"
+  value={gender}
+  onChange={(e) => setGender(e.target.value)}
+>
+  <option value="">-- Select Gender --</option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
+</select>
 
-            <div className="regnew-radio">
-              <label>
-                <input
-                  type="radio"
-                  name="gender"
-                  value="Male"
-                  onChange={(e) => setGender(e.target.value)}
-                />
-                Male
-              </label>
+            {/* <div className="regnew-radio">
+  <label>
+    <input
+      type="radio"
+      name="gender"
+      value="Male"
+      onChange={(e) => setGender(e.target.value)}
+    />
+    Male
+  </label>
 
-              <label>
-                <input
-                  type="radio"
-                  name="gender"
-                  value="Female"
-                  onChange={(e) => setGender(e.target.value)}
-                />
-                Female
-              </label>
-            </div>
+  <label>
+    <input
+      type="radio"
+      name="gender"
+      value="Female"
+      onChange={(e) => setGender(e.target.value)}
+    />
+    Female
+  </label>
+</div> */}
+
 
             <input
               type="number"
@@ -189,9 +203,9 @@ const Register = () => {
       </div>
 
       {/* RIGHT ILLUSTRATION */}
-      <div className="regnew-right">
+      {/* <div className="regnew-right">
         <img src={girlArt} alt="illustration" className="regnew-art" />
-      </div>
+      </div> */}
     </div>
   );
 };
