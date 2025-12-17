@@ -1,28 +1,51 @@
 import React, { useState } from "react";
 import "../../styles/register.css";
 import logo from "../../assets/images/careerVaultLogo.png";
-import girlArt from "../../assets/images/girl_register.png"; 
+import girlArt from "../../assets/images/girl_register.png";
 import { useAuth } from "../../context/authcontext";
 
 const Register = () => {
   const { register } = useAuth();
 
-  const [username, setusername] = useState("");
-  const [fullname, setfullname] = useState("");
-  const [email, setEmail] = useState("");
-  const [mobileno, setMobileNo] = useState("");
-  const [gender, setGender] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
+  // 1. Initial State Object
+  const initialState = {
+    username: "",
+    fullname: "",
+    email: "",
+    mobileno: "",
+    gender: "",
+    password: "",
+    confirm: "",
+  };
+
+  const [formData, setFormData] = useState(initialState);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [busy, setBusy] = useState(false);
+
+  // 2. Generic Change Handler
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // 3. One Function to Reset Everything
+  const resetForm = () => {
+    setFormData(initialState);
+  };
+ 
 
   const onSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
     setBusy(true);
+
+    const { username, fullname, email, mobileno, gender, password, confirm } =
+      formData;
 
     const usernameRegex = /^[A-Za-z0-9]+$/;
     if (!usernameRegex.test(username)) {
@@ -81,13 +104,7 @@ const Register = () => {
 
       if (result?.success) {
         setSuccess(result.message || "Registration successful!");
-        setusername("");
-        setfullname("");
-        setEmail("");
-        setMobileNo("");
-        setGender("");
-        setPassword("");
-        setConfirm("");
+        resetForm();
       } else {
         setError(result?.message || "Something went wrong!");
       }
@@ -100,7 +117,6 @@ const Register = () => {
 
   return (
     <div className="regnew-wrapper">
-
       {/* LEFT WHITE CARD */}
       <div className="regnew-centre">
         <div className="regnew-card">
@@ -111,55 +127,57 @@ const Register = () => {
           {error && <div className="regnew-error">{error}</div>}
           {success && <div className="regnew-success">{success}</div>}
 
-
           <form onSubmit={onSubmit} className="regnew-form">
-           
-           <input
-                type="text"
-                placeholder="User Name"
-                value={username}
-                onChange={(e) => setusername(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Full Name"
-                value={fullname}
-                onChange={(e) => setfullname(e.target.value)}
-              />
-           
+            <input
+              type="text"
+              placeholder="User Name"
+              value={formData.username}
+              onChange={handleChange}
+              name="username"
+            />
+            <input
+              type="text"
+              placeholder="Full Name"
+              value={formData.fullname}
+              name="fullname"
+              onChange={handleChange}
+            />
+
             <input
               type="email"
               placeholder="Email Address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={formData.email}
+              onChange={handleChange}
+              name="email"
             />
-
-            
 
             <div className="regnew-row">
               <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+                type="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                name="password"
+              />
 
-            <input
-              type="password"
-              placeholder="Re-type Password"
-              value={confirm}
-              onChange={(e) => setConfirm(e.target.value)}
-            />
+              <input
+                type="password"
+                placeholder="Re-type Password"
+                value={formData.confirm}
+                name="confirm"
+                onChange={handleChange}
+              />
             </div>
-<select
-  className="regnew-select"
-  value={gender}
-  onChange={(e) => setGender(e.target.value)}
->
-  <option value="">-- Select Gender --</option>
-  <option value="Male">Male</option>
-  <option value="Female">Female</option>
-</select>
+            <select
+              className="regnew-select"
+              name="gender"
+              value={formData.gender}
+              onChange={handleChange}
+            >
+              <option value="">-- Select Gender --</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
 
             {/* <div className="regnew-radio">
   <label>
@@ -183,12 +201,12 @@ const Register = () => {
   </label>
 </div> */}
 
-
             <input
               type="number"
               placeholder="Mobile Number"
-              value={mobileno}
-              onChange={(e) => setMobileNo(e.target.value)}
+              value={formData.mobileno}
+              name="mobileno"
+              onChange={handleChange}
             />
 
             <button type="submit" disabled={busy}>

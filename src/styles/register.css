@@ -166,7 +166,7 @@ button:hover {
 .regnew-error {
   background: #fdecea;
   color: #b00020;
-  padding: 10px 14px;
+  padding: 4px 7px;
   border-left: 4px solid #b00020;
   border-radius: 6px;
   margin-bottom: 10px;
@@ -175,7 +175,7 @@ button:hover {
 .regnew-success {
   background: #e8f6ef;
   color: #0f5132;
-  padding: 10px 14px;
+  padding: 4px 7px;
   border-left: 4px solid #0f5132;
   border-radius: 6px;
   margin-bottom: 10px;
