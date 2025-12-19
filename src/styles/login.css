@@ -200,3 +200,20 @@
   color: #0f2747;
   text-decoration: underline;
 }
+
+.cv-header-text {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.cv-email-highlight {
+  display: inline-block;
+  margin-top: 5px;
+  color: #0f2747; /* Aapka primary dark blue color */
+  font-weight: 700; /* Isse email bold ho jayega */
+  font-size: 15px;
+  background-color: #f0f4f8; /* Halka sa background highlight */
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+

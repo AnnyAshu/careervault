@@ -4,7 +4,7 @@ import logo from "../../assets/images/careerVaultLogo.png";
 import girlArt from "../../assets/images/girl_register.png";
 import { useAuth } from "../../context/authcontext";
 import { useForm } from "react-hook-form";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 const Register = () => {
   const {
     register,
@@ -103,7 +103,6 @@ const Register = () => {
     // }
 
     try {
-
       const result = await userregister(
         username,
         fullname,
@@ -118,15 +117,15 @@ const Register = () => {
         toast.success(result.message);
         reset();
         //resetForm();
-  //       setTimeout(() => {
-  //   setSuccess("");
-  // }, 5000);
+        //       setTimeout(() => {
+        //   setSuccess("");
+        // }, 5000);
       } else {
         toast.error(result?.message || "Something went wrong!");
         //setError(result?.message || "Something went wrong!");
       }
     } catch {
-       toast.error("Server unavailable. Try again later.");
+      toast.error("Server unavailable. Try again later.");
       // setError("Server unavailable. Try again later.");
     } finally {
       setBusy(false);
@@ -273,22 +272,22 @@ const Register = () => {
             </div>
             <div className="input-field-container">
               <input
-                type="number"
+                type="text" 
+                inputMode="numeric"
                 placeholder="Mobile Number"
-                // value={formData.mobileno}
-                // onChange={handleChange}
-                name="mobileno"
+                maxLength={10} 
                 {...register("mobileno", {
-                  required: "please enter mobileno!",
+                  required: "Please enter mobile number!",
                   pattern: {
                     value: /^[6-9]\d{9}$/,
-                    message: "please enter valid number",
+                    message:
+                      "Please enter a valid 10-digit number starting with 6-9",
+                  },
+                  onChange: (e) => {
+                    const val = e.target.value.replace(/[^0-9]/g, ""); // Remove non-numbers
+                    e.target.value = val.slice(0, 10); // Ensure max 10 characters
                   },
                 })}
-                maxLength={10}
-                onInput={(e) => {
-                  e.target.value = e.target.value.replace(/[^0-9]/g, "");
-                }}
               />
               {errors.mobileno && (
                 <span className="error-msg">{errors.mobileno.message}</span>
@@ -305,8 +304,6 @@ const Register = () => {
           </p>
         </div>
       </div>
-
-      
     </div>
   );
 };

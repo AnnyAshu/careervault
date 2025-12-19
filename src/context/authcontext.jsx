@@ -15,30 +15,35 @@ export const AuthProvider = ({ children }) => {
   });
 
   // LOGIN FUNCTION
-  const login = async (username, password) => {
-    const response = await axios.post("https://localhost:7152/api/auth/login", {
-      Username: username,
-      Password: password
-    });
+const login = async (username, password) => {
+  const response = await axios.post("https://localhost:7152/api/auth/login", {
+    Username: username,
+    Password: password
+  });
 
-    const data = response.data;
+  const data = response.data;
 
-    // Save in localStorage
+  // IMPORTANT: Check if the backend actually authenticated the user
+  if (data.success) {
+  
     localStorage.setItem("token", data.token);
     localStorage.setItem("username", data.username);
     localStorage.setItem("roles", JSON.stringify(data.roles));
 
     const userData = {
+      success: true,
       token: data.token,
       username: data.username,
-      roles: data.roles   // roles example: "admin" or "user"
+      roles: data.roles
     };
 
     setUser(userData);
-
-    // 🔥 IMPORTANT → Login.js requires this return
-    return userData;
-  };
+    return userData; 
+  } else {
+    // If success is false (wrong password/user), return the error message
+    return { success: false, message: data.message };
+  }
+};
 
   const userregister = async (username,fullname,email, password,gender,mobileno) => {
     const response = await axios.post("https://localhost:7152/api/auth/register", {

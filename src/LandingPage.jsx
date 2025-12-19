@@ -4,7 +4,7 @@ import ProtectedRoute from "./routes/protectedroute.jsx";
 
 import Login from "./pages/auth/login.jsx";
 import Register from "./pages/auth/register.jsx";
-import ResetPassword from "./pages/auth/resetpassword.jsx";
+import ForgotPassword from "./pages/auth/forgotpassword.jsx";
 import AdminDashboardLayout from "./pages/layout/admindashboardlayout.jsx";
 import Unauthorized from "./pages/Unauthorized.jsx";
 import DashboardHome from "./pages/dashboard/admindashboard.jsx";
@@ -14,6 +14,7 @@ import UserDashboardLayout from "./pages/layout/userdashboardlayout.jsx";
 import Profile from "./pages/profile/userprofile.jsx";
 import MyCourses from "./pages/courses/mycourses.jsx";
 import Applications from "./pages/applications/applications.jsx";
+import ResetPassword from "./pages/auth/reset-password.jsx";
 function LandingPage() {
   return (
     <AuthProvider>
@@ -28,7 +29,8 @@ function LandingPage() {
 
           {/* Register */}
           <Route path="/register" element={<Register />} />
-          <Route path="/resetpassword" element={<ResetPassword/>}/>
+          <Route path="/forgotpassword" element={<ForgotPassword/>}/>
+          <Route path="/reset-password" element={<ResetPassword />} />
           {/* ADMIN LAYOUT */}
           <Route path="/admin" element={<ProtectedRoute allowedRoles={["admin"]}><AdminDashboardLayout /></ProtectedRoute>}>
 

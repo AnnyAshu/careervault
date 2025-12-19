@@ -20,36 +20,42 @@ const Login = () => {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
-  const onSubmit = async (data) => {
-    setError("");
-    setBusy(true);
+const onSubmit = async (data) => {
+  setError("");
+  setBusy(true);
 
-    try {
-      const { username, password } = data;
-      const result = await login(username, password);
-
-      let roles = result?.roles;
-
-      if (!roles || roles.length === 0) {
-        setBusy(false);
-        return setError("User role not found. Contact admin.");
-      }
-
-      let role = roles[0].toLowerCase();
-
-      if (role === "admin") {
-        navigate("/admin/dashboard");
-      } else if (role === "user") {
-        navigate("/user/dashboard");
-      } else {
-        setError("Unauthorized role.");
-      }
-    } catch (err) {
-      setError("Invalid credentials or server error.");
-    } finally {
+  try {
+    const { username, password } = data;
+    const response = await login(username, password);
+console.log(response);
+    if (response.success === false) {
       setBusy(false);
+      return setError(response.message); 
     }
-  };
+
+    const roles = response?.roles;
+
+    if (!roles || roles.length === 0) {
+      setBusy(false);
+      return setError("User role not found. Contact admin.");
+    }
+
+    const normalizedRoles = roles.map(r => r.toLowerCase());
+
+    if (normalizedRoles.includes("admin")) {
+      navigate("/admin/dashboard");
+    } else if (normalizedRoles.includes("user")) {
+      navigate("/user/dashboard");
+    } else {
+      setError("Unauthorized role.");
+    }
+
+  } catch (err) {
+    setError("Server error. Please try again later.");
+  } finally {
+    setBusy(false);
+  }
+};
 
   return (
     <div className="cv-login-wrapper">
@@ -77,6 +83,7 @@ const Login = () => {
                 id="username"
                 className="cv-input"
                 type="text"
+                autoComplete="off"
                 placeholder="Enter username"
                 {...register("username", {
                   required: "Username is required!",
@@ -99,6 +106,7 @@ const Login = () => {
                 id="password"
                 className="cv-input"
                 type="password"
+                autoComplete="off"
                 placeholder="Enter password"
                 {...register("password", {
                   required: "Password is required!",
@@ -118,7 +126,7 @@ const Login = () => {
             </button>
             <div className="cv-login-text">
               <div className="cv-links">
-                <Link to="/resetpassword">Forgot Password?</Link>
+                <Link to="/forgotpassword">Forgot Password?</Link>
                 <span> · </span>
                 <Link to="/register">Create Account</Link>
               </div>
