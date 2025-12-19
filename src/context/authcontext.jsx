@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
     return userData;
   };
 
-  const register = async (username,fullname,email, password,gender,mobileno) => {
+  const userregister = async (username,fullname,email, password,gender,mobileno) => {
     const response = await axios.post("https://localhost:7152/api/auth/register", {
       Username: username,
       Fullname:fullname,
@@ -52,23 +52,23 @@ export const AuthProvider = ({ children }) => {
 
     const data = response.data;
 console.log("register response :" +data )
-    // Save in localStorage
-    // localStorage.setItem("token", data.token);
-    // localStorage.setItem("username", data.username);
-    // localStorage.setItem("roles", JSON.stringify(data.roles));
 
-    // const userData = {
-    //   token: data.token,
-    //   username: data.username,
-    //   roles: data.roles   // roles example: "admin" or "user"
-    // };
-
-    // setUser(userData);
 
     return data;
   };
 
 
+  const sendResetPassword = async (email) => {
+    const response = await axios.post("https://localhost:7152/api/auth/sendresetpassword", {
+      email:email
+    });
+
+    const data = response.data;
+console.log("register response :" +data )
+
+
+    return data;
+  };
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
@@ -77,7 +77,7 @@ console.log("register response :" +data )
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout ,register}}>
+    <AuthContext.Provider value={{ user, login, logout ,userregister,sendResetPassword}}>
       {children}
     </AuthContext.Provider>
   );

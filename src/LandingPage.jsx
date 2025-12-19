@@ -4,6 +4,7 @@ import ProtectedRoute from "./routes/protectedroute.jsx";
 
 import Login from "./pages/auth/login.jsx";
 import Register from "./pages/auth/register.jsx";
+import ResetPassword from "./pages/auth/resetpassword.jsx";
 import AdminDashboardLayout from "./pages/layout/admindashboardlayout.jsx";
 import Unauthorized from "./pages/Unauthorized.jsx";
 import DashboardHome from "./pages/dashboard/admindashboard.jsx";
@@ -27,7 +28,7 @@ function LandingPage() {
 
           {/* Register */}
           <Route path="/register" element={<Register />} />
-
+          <Route path="/resetpassword" element={<ResetPassword/>}/>
           {/* ADMIN LAYOUT */}
           <Route path="/admin" element={<ProtectedRoute allowedRoles={["admin"]}><AdminDashboardLayout /></ProtectedRoute>}>
 

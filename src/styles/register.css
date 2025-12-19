@@ -24,6 +24,9 @@
 }
 /* White Card */
 .regnew-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 430px;
   background: #ffffff;
   padding: 40px 35px;
@@ -63,10 +66,10 @@
   outline: none;
 }
 
-.regnew-row {
+/* .regnew-row {
   display: flex;
   gap: 15px;
-}
+} */
 
 .regnew-radio {
   display: flex;
@@ -173,12 +176,16 @@ button:hover {
 }
 
 .regnew-success {
-  background: #e8f6ef;
+  background-color: #e8f6ef;
   color: #0f5132;
-  padding: 4px 7px;
-  border-left: 4px solid #0f5132;
-  border-radius: 6px;
-  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-left: 5px solid #198754;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding doesn't increase width */
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 /* Login text */
@@ -206,7 +213,51 @@ button:hover {
   max-width: 90%;
   animation: fadeIn 1.2s ease-in-out;
 }
+/* Container for input + error to keep them grouped */
+.input-group {
+  position: relative;
+  width: 100%;
+  margin-bottom: 18px; /* Move margin from input to the group */
+}
 
+/* Update your existing input style to remove bottom margin */
+.regnew-form input, 
+.regnew-select {
+  margin-bottom: 0px; 
+}
+
+
+/* 1. Wrap every input + span pair in this */
+.input-field-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 22px; /* Consistent spacing between fields */
+}
+
+/* 2. Fix the error message styling */
+.error-msg {
+  position: absolute;
+  left: 0;
+  bottom: -18px; /* Positions it right under the box */
+  color: #d93025;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* 3. Ensure the password row stays side-by-side */
+.regnew-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 22px; /* Same as the container margin */
+}
+
+.regnew-row .input-field-container {
+  margin-bottom: 0; /* Let the row handle the bottom margin */
+}
+/* Fix for the Password Row */
+.regnew-row .input-group {
+  flex: 1; /* Makes both password fields equal width */
+}
 /* Responsive */
 @media (max-width: 950px) {
   .regnew-wrapper {
@@ -232,4 +283,15 @@ button:hover {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
