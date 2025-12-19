@@ -4,7 +4,7 @@ import ProtectedRoute from "./routes/protectedroute.jsx";
 
 import Login from "./pages/auth/login.jsx";
 import Register from "./pages/auth/register.jsx";
-import ForgotPassword from "./pages/auth/forgotpassword.jsx";
+import ForgotPassword from "./pages/auth/forgot-password.jsx";
 import AdminDashboardLayout from "./pages/layout/admindashboardlayout.jsx";
 import Unauthorized from "./pages/Unauthorized.jsx";
 import DashboardHome from "./pages/dashboard/admindashboard.jsx";
