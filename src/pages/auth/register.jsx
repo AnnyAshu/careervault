@@ -232,7 +232,7 @@ const Register = () => {
               <div className="input-field-container">
                 <input
                   type="password"
-                  placeholder="Re-type Password"
+                  placeholder="Confirm Password"
                   {...register("confirm", {
                     required: "confirm password is required!",
                     validate: (value) =>

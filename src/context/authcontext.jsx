@@ -40,7 +40,6 @@ const login = async (username, password) => {
     setUser(userData);
     return userData; 
   } else {
-    // If success is false (wrong password/user), return the error message
     return { success: false, message: data.message };
   }
 };
@@ -74,6 +73,37 @@ console.log("register response :" +data )
 
     return data;
   };
+
+  const getUserProfile = async (username) => {
+  try {
+    const response = await axios.get(`https://localhost:7152/api/auth/get-profile?username=${username}`);
+    console.log(response);
+    return response.data; 
+  } catch (error) {
+    console.error("Profile Fetch Error:", error);
+    return { success: false, message: "Server error" };
+  }
+};
+
+const updateUserProfile = async (formData) => {
+  try {
+    const response = await axios.post("https://localhost:7152/api/auth/update-profile", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    
+    const data = response.data;
+    
+    if (data.success) 
+      {
+      // setUser(prev => ({ ...prev, profileimage: data.imageUrl })); 
+    }
+    
+    return data;
+  } catch (error) {
+    console.error("Profile Update Error:", error);
+    return { success: false, message: "Update failed" };
+  }
+};
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
@@ -82,7 +112,7 @@ console.log("register response :" +data )
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout ,userregister,sendResetPassword}}>
+    <AuthContext.Provider value={{ user, login, logout ,userregister,sendResetPassword,getUserProfile,updateUserProfile}}>
       {children}
     </AuthContext.Provider>
   );

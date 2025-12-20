@@ -1,11 +1,12 @@
 import "../../styles/admindashboard.css";
 
 export default function AdminDashboard() {
+  const username = localStorage.getItem("username") || "User";
   return (
     <>
             <div className="dashboard-header">
               <h1>Dashboard Overview</h1>
-              <span className="welcome-box">Welcome back, User Name!</span>
+              <span className="welcome-box">Welcome back, {username}</span>
             </div>
 
             <div className="cards-grid">

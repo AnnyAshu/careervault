@@ -2,7 +2,7 @@ import axios from "axios";
 import { getToken } from "../utils/tokenHelper";
 
 const api = axios.create({
-  baseURL: "https://localhost:7000/api", // ⚠ Change to your .NET API URL
+  baseURL: "https://localhost:7152/api",
 });
 
 // Add token to every request
