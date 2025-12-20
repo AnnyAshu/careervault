@@ -45,6 +45,7 @@ function LandingPage() {
 
             <Route index element={<UserDashboard />} />
             <Route path="dashboard" element={<UserDashboard />} />
+             <Route path="profile" element={<Profile />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -9,9 +9,10 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState(null);
   const [notification, setNotification] = useState({ show: false, msg: "", type: "" });
-  const { register, handleSubmit, reset, setValue } = useForm();
+  
+  // Extract formState to get errors
+  const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
 
-  // Handle showing and hiding messages automatically
   const triggerNotification = (msg, type = "success") => {
     setNotification({ show: true, msg, type });
     setTimeout(() => setNotification({ show: false, msg: "", type: "" }), 4000);
@@ -72,7 +73,6 @@ const Profile = () => {
 
   return (
     <div className="profile-main-container">
-      {/* Toast Notification Replacement for Alert */}
       {notification.show && (
         <div className={`notification-toast ${notification.type}`}>
           {notification.msg}
@@ -87,7 +87,6 @@ const Profile = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="profile-form-card">
         <div className="profile-grid-layout">
           
-          {/* Avatar Section */}
           <div className="profile-photo-column">
             <div className="avatar-preview-wrapper">
               <img src={preview || avatarProfile} alt="User" />
@@ -102,16 +101,27 @@ const Profile = () => {
             </div>
           </div>
 
-          {/* Form Fields Section */}
           <div className="profile-details-column">
             <div className="field-row">
               <div className="field-group">
                 <label>First Name</label>
-                <input type="text" {...register("firstname")} placeholder="First Name" />
+                <input 
+                  type="text" 
+                  {...register("firstname", { required: "First name is required" })} 
+                  placeholder="First Name" 
+                  className={errors.firstname ? "error-input" : ""}
+                />
+                {errors.firstname && <span className="error-text">{errors.firstname.message}</span>}
               </div>
               <div className="field-group">
                 <label>Last Name</label>
-                <input type="text" {...register("lastname")} placeholder="Last Name" />
+                <input 
+                  type="text" 
+                  {...register("lastname", { required: "Last name is required" })} 
+                  placeholder="Last Name" 
+                  className={errors.lastname ? "error-input" : ""}
+                />
+                {errors.lastname && <span className="error-text">{errors.lastname.message}</span>}
               </div>
             </div>
 
@@ -126,20 +136,36 @@ const Profile = () => {
                 <input 
                   type="text" 
                   maxLength={10} 
-                  {...register("mobilenumber", {
+                  {...register("mobilenumber", { 
+                    required: "Phone number is required",
+                    minLength: { value: 10, message: "Must be 10 digits" },
                     onChange: (e) => e.target.value = e.target.value.replace(/[^0-9]/g, "")
                   })} 
+                  className={errors.mobilenumber ? "error-input" : ""}
                 />
+                {errors.mobilenumber && <span className="error-text">{errors.mobilenumber.message}</span>}
               </div>
               <div className="field-group">
                 <label>Location</label>
-                <input type="text" {...register("location")} placeholder="City, Country" />
+                <input 
+                  type="text" 
+                  {...register("location", { required: "Location is required" })} 
+                  placeholder="City, Country" 
+                  className={errors.location ? "error-input" : ""}
+                />
+                {errors.location && <span className="error-text">{errors.location.message}</span>}
               </div>
             </div>
 
             <div className="field-group">
               <label>About Me</label>
-              <textarea {...register("aboutme")} rows="5" placeholder="Write a few lines about yourself..."></textarea>
+              <textarea 
+                {...register("aboutme", { required: "Please write something about yourself" })} 
+                rows="5" 
+                placeholder="Write a few lines about yourself..."
+                className={errors.aboutme ? "error-input" : ""}
+              ></textarea>
+              {errors.aboutme && <span className="error-text">{errors.aboutme.message}</span>}
             </div>
 
             <div className="form-footer">
