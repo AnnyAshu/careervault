@@ -4,7 +4,7 @@ import { createContext, useContext, useState } from "react";
 import axios from "axios";
 
 export const AuthContext = createContext();
-
+const apiUrl=import.meta.env.VITE_API_BASE_URL;
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     const token = localStorage.getItem("token");
@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
 
   // LOGIN FUNCTION
 const login = async (username, password) => {
-  const response = await axios.post("https://localhost:7152/api/auth/login", {
+  const response = await axios.post(apiUrl+"auth/login", {
     Username: username,
     Password: password
   });
@@ -45,7 +45,7 @@ const login = async (username, password) => {
 };
 
   const userregister = async (username,fullname,email, password,gender,mobileno) => {
-    const response = await axios.post("https://localhost:7152/api/auth/register", {
+    const response = await axios.post(apiUrl+"auth/register", {
       Username: username,
       Fullname:fullname,
       email:email,
@@ -63,7 +63,7 @@ console.log("register response :" +data )
 
 
   const sendResetPassword = async (email) => {
-    const response = await axios.post("https://localhost:7152/api/auth/sendresetpassword", {
+    const response = await axios.post(apiUrl+"auth/sendresetpassword", {
       email:email
     });
 
@@ -76,7 +76,7 @@ console.log("register response :" +data )
 
   const getUserProfile = async (username) => {
   try {
-    const response = await axios.get(`https://localhost:7152/api/auth/get-profile?username=${username}`);
+    const response = await axios.get(apiUrl+`auth/get-profile?username=${username}`);
     console.log(response);
     return response.data; 
   } catch (error) {
@@ -87,7 +87,7 @@ console.log("register response :" +data )
 
 const updateUserProfile = async (formData) => {
   try {
-    const response = await axios.post("https://localhost:7152/api/auth/update-profile", formData, {
+    const response = await axios.post(apiUrl+"auth/update-profile", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     
