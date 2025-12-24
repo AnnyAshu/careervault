@@ -118,8 +118,9 @@ const updateUserProfile = async (formData) => {
   );
 };
 
-// Custom Hook
+// Custom Hook 
 export const useAuth = () => useContext(AuthContext);
+
 
 
 
