@@ -1,72 +1,55 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../../context/authcontext";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "../../styles/login.css";
-
 import logo from "../../assets/images/careerVaultLogo.png";
 
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../Redux/Slices/authSlice";
+
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { loading, error } = useSelector((state) => state.auth);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    mode: "onChange",
-  });
+  } = useForm({ mode: "onChange" });
 
-  const { login } = useAuth();
-  const navigate = useNavigate();
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState("");
+  const onSubmit = async (data) => {
+    const result = await dispatch(
+      login({
+        username: data.username,
+        password: data.password,
+      })
+    );
 
-const onSubmit = async (data) => {
-  setError("");
-  setBusy(true);
+    if (login.fulfilled.match(result)) {
+      const roles = result.payload.roles?.map((r) => r.toLowerCase());
 
-  try {
-    const { username, password } = data;
-    const response = await login(username, password);
-console.log(response);
-    if (response.success === false) {
-      setBusy(false);
-      return setError(response.message); 
+      if (roles?.includes("admin")) {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/user/dashboard");
+      }
     }
-
-    const roles = response?.roles;
-
-    if (!roles || roles.length === 0) {
-      setBusy(false);
-      return setError("User role not found. Contact admin.");
-    }
-
-    const normalizedRoles = roles.map(r => r.toLowerCase());
-
-    if (normalizedRoles.includes("admin")) {
-      navigate("/admin/dashboard");
-    } else if (normalizedRoles.includes("user")) {
-      navigate("/user/dashboard");
-    } else {
-      setError("Unauthorized role.");
-    }
-
-  } catch (err) {
-    setError("Server error. Please try again later.");
-  } finally {
-    setBusy(false);
-  }
-};
+  };
 
   return (
     <div className="cv-login-wrapper">
       <div className="cv-login-centre">
         <div className="cv-login-card">
           <img src={logo} alt="CareerVault" className="cv-logo" />
+
           <div className="cv-header-text">
             <h2 className="cv-login-heading">Unlock Your Vault</h2>
-            <p className="cv-subtitle">Enter your credentials to access your career profile.</p>
+            <p className="cv-subtitle">
+              Enter your credentials to access your career profile.
+            </p>
           </div>
-          {/* <h2 className="cv-login-heading">Login to Your Account</h2> */}
 
           {error && <div className="cv-error">{error}</div>}
 
@@ -76,14 +59,10 @@ console.log(response);
             autoComplete="off"
           >
             <div className="input-field-container">
-              <label className="cv-label" htmlFor="username">
-                Username
-              </label>
+              <label className="cv-label">Username</label>
               <input
-                id="username"
                 className="cv-input"
                 type="text"
-                autoComplete="off"
                 placeholder="Enter username"
                 {...register("username", {
                   required: "Username is required!",
@@ -94,19 +73,17 @@ console.log(response);
                 })}
               />
               {errors.username && (
-                <span className="error-msg">{errors.username.message}</span>
+                <span className="error-msg">
+                  {errors.username.message}
+                </span>
               )}
             </div>
 
             <div className="input-field-container">
-              <label className="cv-label" htmlFor="password">
-                Password
-              </label>
+              <label className="cv-label">Password</label>
               <input
-                id="password"
                 className="cv-input"
                 type="password"
-                autoComplete="off"
                 placeholder="Enter password"
                 {...register("password", {
                   required: "Password is required!",
@@ -117,13 +94,16 @@ console.log(response);
                 })}
               />
               {errors.password && (
-                <span className="error-msg">{errors.password.message}</span>
+                <span className="error-msg">
+                  {errors.password.message}
+                </span>
               )}
             </div>
 
-            <button className="cv-btn" type="submit" disabled={busy}>
-              {busy ? "Signing in..." : "ENTER VAULT"}
+            <button className="cv-btn" type="submit" disabled={loading}>
+              {loading ? "Signing in..." : "ENTER VAULT"}
             </button>
+
             <div className="cv-login-text">
               <div className="cv-links">
                 <Link to="/forgotpassword">Forgot Password?</Link>
